@@ -1,0 +1,18 @@
+<nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" (click) = "goToHome()">FoodStore</a>
+      
+      <ng-container *ngIf="isLoggedIn(); else loginLinks">
+        <ng-container *ngIf="getRole() == 'Customer' ; else loginLinks">
+            <a class="nav-link" (click)="viewCart()">View Cart</a>
+            <a class="nav-link" (click)="viewOrders()">View Orders</a>
+        </ng-container>
+        <a class="nav-link" (click)="logout()">Logout</a>
+        
+      </ng-container>
+  
+      <ng-template #loginLinks>
+       
+      </ng-template>
+    </div>
+  </nav>

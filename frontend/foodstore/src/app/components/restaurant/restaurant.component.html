@@ -1,0 +1,64 @@
+<div class="container mt-4" *ngIf="restaurantData">
+  <h2>{{ restaurantData.name }}</h2>
+  <p>Location: {{ restaurantData.location }}</p>
+  <p>Cuisine: {{ restaurantData.cuisine }}</p>
+</div>
+
+<div class="container mt-4">
+  <button class="btn btn-primary" (click)="addMenu()" *ngIf="getRole() === 'Owner'">Add Menu</button>
+</div>
+
+<div class="container mt-4">
+  <h3>Menu</h3>
+  <ul class="list-group" *ngIf="restaurantMenu">
+    <li class="list-group-item" *ngFor="let item of restaurantMenu">
+      {{ item.dish_name }} - {{ item.price }}
+
+      <div *ngIf="getRole() === 'Customer'" class="mt-2">
+        Quantity:
+        <button class="btn btn-secondary btn-sm" (click)="decrementQuantity()" [disabled]="quantity === 0">-</button>
+        {{ quantity }}
+        <button class="btn btn-secondary btn-sm" (click)="incrementQuantity()" [disabled]="quantity === 10">+</button>
+      </div>
+
+      <div class="mt-2">
+        <button class="btn btn-warning" (click)="editMenu(item.menu_id)" *ngIf="getRole() === 'Owner'">Edit</button>
+        <button class="btn btn-danger" (click)="deleteMenu(item.menu_id)" *ngIf="getRole() === 'Owner'">Delete</button>
+        <button class="btn btn-success" (click)="addToCart(item.menu_id, item.restaurant_id, quantity)" *ngIf="getRole() === 'Customer'">Add To Cart</button>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div class="container mt-4" *ngIf="orders && orders.length > 0 && getRole() == 'Owner'">
+  <h2>Orders</h2>
+  <ul class="list-group" *ngFor="let order of orders">
+    <li class="list-group-item">
+      <div>
+        <strong>Order ID:</strong> {{ order.order_id }}
+      </div>
+      <div>
+        <strong>Status:</strong> {{ order.status }}
+      </div>
+      <div class="mt-2">
+        <strong>New Status:</strong>
+        <input type="text" [(ngModel)]="order.newStatus" class="form-control" />
+        <button class="btn btn-info" (click)="updateOrderStatus(order)">Update Status</button>
+      </div>
+      <div class="mt-2">
+        <strong>Items:</strong>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let item of order.items">
+            {{ item.dish_name }} - Quantity: {{ item.quantity }}
+          </li>
+        </ul>
+      </div>
+      <hr class="my-2" />
+    </li>
+  </ul>
+</div>
+
+
+
+
+  

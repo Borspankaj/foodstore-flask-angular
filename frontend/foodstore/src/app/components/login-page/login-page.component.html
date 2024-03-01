@@ -1,0 +1,25 @@
+<!-- login.component.html -->
+
+<div class="card">
+    <div class="card-title"><h3>Login</h3></div>
+    <div class="card-body">
+        <form (ngSubmit)="onSubmit()">
+
+            <div class="form-outline mb-4">
+                <input type="email" id="form2Example1" class="form-control" [(ngModel)]="email" name="email" />
+                <label class="form-label" for="form2Example1">Email address</label>
+            </div>
+            <div class="form-outline mb-4">
+                <input type="password" id="form2Example2" class="form-control" [(ngModel)]="password" name="password" />
+                <label class="form-label" for="form2Example2">Password</label>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+            <div class="text-center">
+                <p>Not a member? <a (click)="navigateToRegister()">Register</a></p>
+            </div>
+            <div *ngIf="errorMessage" class="error-message">
+                {{ errorMessage }}
+              </div>
+        </form>
+    </div>
+</div>

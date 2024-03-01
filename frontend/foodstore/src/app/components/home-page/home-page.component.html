@@ -1,0 +1,17 @@
+<div class="container-fluid mt-4">
+    <form class="d-flex" role="search" (ngSubmit)="onSearch()">
+      <input type="search" class="form-control" [(ngModel)]="searchKeyword" name="searchKeyword" placeholder="Search">
+      <button type="submit" class="btn btn-primary ml-2">Search</button>
+    </form>
+  </div>
+  
+  <div class="container mt-4">
+    <h2>Restaurants</h2>
+    <div *ngFor="let restaurant of restaurants" class="card mb-3">
+      <div class="card-body">
+        <h4 class="card-title">{{ restaurant.name }}</h4>
+        <button class="btn btn-primary" (click)="viewDetails(restaurant.id)">View Details</button>
+      </div>
+    </div>
+  </div>
+  

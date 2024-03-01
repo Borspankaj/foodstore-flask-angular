@@ -1,0 +1,18 @@
+<div class="container mt-4">
+  <div>
+    <h2>Welcome, Restaurant Owner!</h2>
+    <button class="btn btn-primary" (click)="registerRestaurant()">Register Restaurant</button>
+  </div>
+
+  <h3>Your Restaurants</h3>
+  <ul class="list-group" *ngIf="ownerRestaurants && ownerRestaurants.length > 0">
+    <li class="list-group-item" *ngFor="let restaurant of ownerRestaurants">
+      {{ restaurant.name }} - {{ restaurant.location }}
+      <button class="btn btn-info btn-sm ml-2" (click)="goToRestaurant(restaurant.id)">View Details</button>
+    </li>
+  </ul>
+
+  <div *ngIf="!ownerRestaurants || ownerRestaurants.length === 0">
+    <p class="mt-3">You have no registered restaurants.</p>
+  </div>
+</div>
